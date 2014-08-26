@@ -1,0 +1,38 @@
+Visumazer is composed of two parts: visumaze and maze_gen.
+
+visumaze is the maze parser and visualizer.
+usage: ./visumaze [foo.maze] OR
+       ./visumaze < [foo.maze]
+
+It reads a maze file from standard in or the first command line argument
+and displays it in OpenGL. Maze files must be composed of entirely spaces,
+the # symbol, and newlines. All lines in the maze file must be of the same
+length as the first line. # represents a wall.
+
+Inside of the visualizer, there are a few controls to note:
+  awsd moves the camera left, up, down, and right respectively.
+
+  the arrow keys rotate the camera around the y and x axes.
+
+  the space bar moves the camera up into the air; affected by gravity.
+
+  jikl moves the light source left, up, down, and right. this is mostly for
+  debugging, but it is sort of cool to see the 'shadows' change.
+
+  q or escape quits.
+
+
+maze_gen is the random maze generator. 
+usage: ./maze_gen width height
+
+NOTE: currently broken. There are some bugs in my algorithm. If I had more
+time, I would use a saner maze_type data structure that would make this *much*
+easier. The one that I use is not suitable for walls, so I have to do some
+difficult interpolation that is undoubtedly the source of the current problems.
+
+maze_gen takes a width and a height and prints out a random complete maze
+without any loops to standard out. It uses a modified version of the
+depth-first search algorithm (taken from wikipedia Maze_generation_algorithm)
+to randomly carve paths from the starting cell. The algorithm is recursive,
+and similar to depth-first search except it randomizes the next neighbors to
+go to.
